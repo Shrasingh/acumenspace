@@ -34,6 +34,8 @@ const CompleteSigIn = async () => {
       `/group/${authenticated.groupId}/channel/${authenticated.channelId}`,
     )
 
+  console.log("authenticated status", authenticated.status)
+
   // unexpected erorr redirect to sign in
   if (authenticated.status !== 200) return redirect("/sign-in")
 }
