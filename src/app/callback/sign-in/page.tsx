@@ -20,6 +20,8 @@ const CompleteSigIn = async () => {
       clerkId: user.id,
     })
 
+    console.log("complete", complete)
+
     if (complete.status === 200) {
       return redirect(`/group/create`)
     }
