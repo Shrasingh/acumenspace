@@ -23,6 +23,7 @@ const CompleteSigIn = async () => {
     console.log("complete", complete)
 
     if (complete.status === 200) {
+      console.log("complete status in group create", complete.status)
       return redirect(`/group/create`)
     }
   }
@@ -34,10 +35,11 @@ const CompleteSigIn = async () => {
       `/group/${authenticated.groupId}/channel/${authenticated.channelId}`,
     )
 
-  console.log("authenticated status", authenticated.status)
-
   // unexpected erorr redirect to sign in
-  if (authenticated.status !== 200) return redirect("/sign-in")
+  if (authenticated.status !== 200) {
+    console.log("authenticated status", authenticated.status)
+    return redirect("/sign-in")
+  }
 }
 
 export default CompleteSigIn
