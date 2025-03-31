@@ -6,11 +6,8 @@ import { Button } from "@/components/ui/button"
 import { GROUPLE_CONSTANTS } from "@/constants"
 import { useAuthSignIn } from "@/hooks/authentication"
 
-
-
 const SignInForm = () => {
-  const { isPending, onAuthenticateUser, register, errors } =  useAuthSignIn()
-
+  const { isPending, onAuthenticateUser, register, errors } = useAuthSignIn()
 
   return (
     <form className="flex flex-col gap-3 mt-10" onSubmit={onAuthenticateUser}>

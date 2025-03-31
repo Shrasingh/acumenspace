@@ -29,7 +29,7 @@ const CallToAction = () => {
         >
           Watch Demo
         </Button>
-        <Link href="/sign-in">
+        <Link key={+"signInGet"} href="/sign-in">
           <Button className="rounded-xl text-base flex gap-2 w-full">
             <BadgePlus /> Get Started
           </Button>

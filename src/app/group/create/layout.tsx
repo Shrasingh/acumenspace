@@ -12,7 +12,9 @@ const CreateGroupLayout = ({ children }: Props) => {
     <div className="container h-screen grid grid-cols-1 lg:grid-cols-2 content-center">
       <div className="flex items-center">
         <BackdropGradient className="w-8/12 h-2/6 opacity-50">
-          <h5 className="text-2xl font-bold text-themeTextWhite">Acumenspace</h5>
+          <h5 className="text-2xl font-bold text-themeTextWhite">
+            Acumenspace
+          </h5>
           <GradientText element="H2" className="text-4xl font-semibold py-1">
             Create Your Group
           </GradientText>

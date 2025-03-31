@@ -33,7 +33,10 @@ export const Navbar = async () => {
         <div>Content</div>
       </GlassSheet>
       <div className="flex-1 lg:flex hidden justify-end gap-3">
-        <Link href={user.status === 200 ? `/group/create` : "/sign-in"}>
+        <Link
+          key={+"signInGp"}
+          href={user.status === 200 ? `/group/create` : "/sign-in"}
+        >
           <Button
             variant="outline"
             className="bg-themeBlack rounded-2xl flex gap-2 border-themeGray hover:bg-themeGray"
@@ -45,7 +48,7 @@ export const Navbar = async () => {
         {user.status === 200 ? (
           <UserWidget image={user.image!} />
         ) : (
-          <Link href="/sign-in">
+          <Link key={+"LogoutInGp"} href="/sign-in">
             <Button
               variant="outline"
               className="bg-themeBlack rounded-2xl flex gap-2 border-themeGray hover:bg-themeGray"

@@ -15,7 +15,7 @@ type Props = {
 
 const Page = async ({ params }: Props) => {
   const query = new QueryClient()
-  const {groupid} = await params;
+  const { groupid } = await params
 
   await query.prefetchQuery({
     queryKey: ["about-group-info"],
@@ -44,4 +44,3 @@ const Page = async ({ params }: Props) => {
 }
 
 export default Page
-

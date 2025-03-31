@@ -15,7 +15,7 @@ type Props = {
 
 const CoursesPage = async ({ params }: Props) => {
   const client = new QueryClient()
-  const { groupid }= await params
+  const { groupid } = await params
   await client.prefetchQuery({
     queryKey: ["group-courses"],
     queryFn: () => onGetGroupCourses(groupid),

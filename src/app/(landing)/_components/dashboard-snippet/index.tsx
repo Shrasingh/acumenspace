@@ -14,7 +14,7 @@ const DashboardSnippet = () => {
           alt="snippet"
           sizes="100vw"
           fill
-         style= {{ objectFit: "contain" }} 
+          style={{ objectFit: "contain" }}
         />
       </div>
     </div>

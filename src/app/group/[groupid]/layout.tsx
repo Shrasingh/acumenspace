@@ -25,7 +25,7 @@ type Props = {
 
 const GroupLayout = async ({ children, params }: Props) => {
   const query = new QueryClient()
-  const { groupid }= await params
+  const { groupid } = await params
 
   const user = await onAuthenticatedUser()
   if (!user.id) redirect("/sign-in")

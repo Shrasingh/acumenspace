@@ -7,7 +7,7 @@ type Props = {
 }
 
 const Affiliate = async ({ params }: Props) => {
-  const { groupid} = await params
+  const { groupid } = await params
   const affiliate = await onGetAffiliateLink(groupid)
   return (
     <div className="flex flex-col items-start p-5">

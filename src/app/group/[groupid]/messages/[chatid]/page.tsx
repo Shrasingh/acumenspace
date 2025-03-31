@@ -12,9 +12,9 @@ import { ChatWindow } from "../_components/chat"
 
 const MemberChatPage = async ({ params }: { params: { chatid: string } }) => {
   const query = new QueryClient()
-  const { chatid} = await params
+  const { chatid } = await params
   const member = await onGetUserFromMembership(chatid)
-  
+
   await query.prefetchQuery({
     queryKey: ["user-messages"],
     queryFn: () => onGetAllUserMessages(chatid),

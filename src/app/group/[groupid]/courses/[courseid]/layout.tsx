@@ -17,8 +17,8 @@ type CourseLayoutProps = {
 
 const CourseLayout = async ({ params, children }: CourseLayoutProps) => {
   const client = new QueryClient()
-  const { groupid }= await params
-const { courseid }= await params
+  const { groupid } = await params
+  const { courseid } = await params
   await client.prefetchQuery({
     queryKey: ["course-modules"],
     queryFn: () => onGetCourseModules(courseid),
@@ -28,14 +28,8 @@ const { courseid }= await params
     <HydrationBoundary state={dehydrate(client)}>
       <div className="grid grid-cols-1 h-full lg:grid-cols-4 overflow-hidden">
         <div className="bg-themeBlack p-5 overflow-y-auto">
-          <CreateCourseModule
-            courseId={courseid}
-            groupid={groupid}
-          />
-          <CourseModuleList
-            groupid={groupid}
-            courseId={courseid}
-          />
+          <CreateCourseModule courseId={courseid} groupid={groupid} />
+          <CourseModuleList groupid={groupid} courseId={courseid} />
         </div>
         <div className="lg:col-span-3 max-h-full h-full pb-10 overflow-y-auto bg-[#101011]/90">
           {children}

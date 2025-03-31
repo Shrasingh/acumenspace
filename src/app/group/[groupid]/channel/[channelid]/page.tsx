@@ -24,7 +24,7 @@ const GroupChannelPage = async ({ params }: Props) => {
   const authUser = await onAuthenticatedUser()
 
   const groupId = await params.groupid
-  const channelId = await params.channelId;
+  const channelId = await params.channelId
 
   await client.prefetchQuery({
     queryKey: ["channel-info"],

@@ -18,7 +18,7 @@ const CourseContentPageLayout = async ({
   params,
 }: CourseContentPageLayout) => {
   const client = new QueryClient()
-  const { sectionid }= await params
+  const { sectionid } = await params
 
   await client.prefetchQuery({
     queryKey: ["section-info"],

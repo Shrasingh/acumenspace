@@ -11,7 +11,7 @@ const IntegrationsPage = async ({
   params: { groupid: string }
 }) => {
   const payment = await onGetStripeIntegration()
-  const {groupid }= await params
+  const { groupid } = await params
   const connections = {
     stripe: payment ? true : false,
   }

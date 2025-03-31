@@ -22,6 +22,7 @@ const ExploreLayout = async ({ children }: { children: React.ReactNode }) => {
         <p className="text-themeTextGray leading-none pt-2">
           or{" "}
           <Link
+            key={+"signInOwn"}
             href={user.status === 200 ? `/group/create` : "/sign-in"}
             className="underline"
           >

@@ -25,7 +25,7 @@ const PostPage = async ({ params }: { params: { postid: string } }) => {
   })
 
   const user = await onAuthenticatedUser()
-  const { postid }= await params
+  const { postid } = await params
   return (
     <HydrationBoundary state={dehydrate(client)}>
       <div className="grid grid-cols-4 px-5 py-5 gap-x-10">

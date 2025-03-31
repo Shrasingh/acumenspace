@@ -8,7 +8,7 @@ type HuddlesLayoutProps = {
 }
 
 const HuddlesLayout = async ({ children, params }: HuddlesLayoutProps) => {
-  const { groupid }= await params
+  const { groupid } = await params
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-6 flex-1 h-0">
