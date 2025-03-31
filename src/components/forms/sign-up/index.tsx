@@ -6,7 +6,6 @@ import { GROUPLE_CONSTANTS } from "@/constants"
 import { useAuthSignUp } from "@/hooks/authentication"
 import dynamic from "next/dynamic"
 
-
 const OtpInput = dynamic(
   () =>
     import("@/components/global/otp-input").then(
@@ -25,7 +24,6 @@ const SignUpForm = () => {
     onInitiateUserRegistration,
     code,
     setCode,
-    getValues,
   } = useAuthSignUp()
 
   return (
@@ -56,9 +54,7 @@ const SignUpForm = () => {
         <Button
           type="button"
           className="rounded-2xl"
-          onClick={() =>
-            onGenerateCode(getValues("email"), getValues("password"))
-          }
+          onClick={() => onGenerateCode()}
         >
           <Loader loading={false}>Generate Code</Loader>
         </Button>
