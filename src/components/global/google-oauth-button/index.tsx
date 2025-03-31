@@ -11,15 +11,17 @@ type GoogleAuthButtonProps = {
 
 export const GoogleAuthButton = ({ method }: GoogleAuthButtonProps) => {
   const { signUpWith, signInWith } = useGoogleAuth()
+
+  const handleClick = () => {
+    if (method === "signin") {
+      signInWith("oauth_google")
+    } else {
+      signUpWith("oauth_google")
+    }
+  }
   return (
     <Button
-      {...(method === "signin"
-        ? {
-            onClick: () => signInWith("oauth_google"),
-          }
-        : {
-            onClick: () => signUpWith("oauth_google"),
-          })}
+      onClick={handleClick}
       className="w-full rounded-2xl flex gap-3 bg-themeBlack border-themeGray"
       variant="outline"
     >

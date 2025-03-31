@@ -52,7 +52,7 @@ const Menu = ({ orientation }: MenuProps) => {
                 "rounded-xl flex gap-2 py-2 px-4 items-center",
                 section == menuItem.path ? "bg-themeGray border-[#27272A]" : "",
               )}
-              key={menuItem.id + index + 1}
+              key={menuItem.id || index + 1}
             >
               {menuItem.icon}
               {menuItem.label}

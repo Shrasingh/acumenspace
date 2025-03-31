@@ -10,16 +10,13 @@ const GroupCreatePage = async ({
 }: {
   searchParams: { [affiliate: string]: string }
 }) => {
-  const user = await onAuthenticatedUser();
-  console.log(user.username);
+  const user = await onAuthenticatedUser()
   if (!user || !user.id) redirect("/sign-in")
 
   // const userId = user.id
-  
-  const {affiliateParams} = await searchParams;
-  const affiliate = await onGetAffiliateInfo(affiliateParams);
 
- 
+  const { affiliateParams } = await searchParams
+  const affiliate = await onGetAffiliateInfo(affiliateParams)
 
   return (
     <>

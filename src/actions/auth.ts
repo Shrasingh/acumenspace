@@ -6,7 +6,6 @@ import { currentUser } from "@clerk/nextjs/server"
 export const onAuthenticatedUser = async () => {
   try {
     const clerk = await currentUser()
-    console.log("clerk auth.ts", clerk?.fullName)
     if (!clerk) return { status: 404 }
 
     const user = await client.user.findUnique({
@@ -19,9 +18,8 @@ export const onAuthenticatedUser = async () => {
         lastname: true,
       },
     })
- console.log("db user",user?.firstname)
- 
-    if (user) 
+
+    if (user)
       return {
         status: 200,
         id: user.id,
@@ -96,7 +94,12 @@ export const onSignInUser = async (clerkId: string) => {
       },
     })
 
-    console.log("loggedInUser", loggedInUser)
+    if (!loggedInUser) {
+      return {
+        status: 404,
+        message: "User doesn't exist, try signing up",
+      }
+    }
 
     if (loggedInUser) {
       if (loggedInUser.group.length > 0) {
