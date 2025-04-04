@@ -76,6 +76,7 @@ export const onSignUpUser = async (data: {
     //   }
     // }
   } catch (error) {
+    console.error("Error creating user:", error)
     return {
       status: 400,
       message: "Oops! something went wrong. Try again",

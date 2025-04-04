@@ -1,47 +1,64 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server"
 import { NextResponse } from "next/server"
 
-const isProtectedRoute = createRouteMatcher(["/group(.*)"])
+const isProtectedRoute = createRouteMatcher(["/group(.*)", "/dashboard(.*)"])
 
 export default clerkMiddleware(async (auth, req) => {
-  const baseHost = "localhost:3000"
-  const host = req.headers.get("host")?.trim() || baseHost
-  const reqPath = req.nextUrl.pathname
-  const origin = req.nextUrl.origin
+  // Get the request URL and host
+  const url = req.nextUrl
+  const host =
+    req.headers.get("host") ||
+    process.env.NEXT_PUBLIC_BASE_HOST ||
+    "localhost:3000"
+  const isProduction = process.env.NODE_ENV === "production"
 
-  // ✅ Ensure a proper NextResponse is returned after protecting the route
+  // 1. Handle protected routes
   if (isProtectedRoute(req)) {
-    await auth().protect()
-    return NextResponse.next() // ✅ Explicitly return NextResponse
+    const { userId, sessionClaims, redirectToSignIn } = auth()
+
+    // For API routes, return 401 if unauthorized
+    if (url.pathname.startsWith("/api") && !userId) {
+      return new NextResponse(JSON.stringify({ error: "Unauthorized" }), {
+        status: 401,
+        headers: { "Content-Type": "application/json" },
+      })
+    }
+
+    // For pages, redirect to sign-in if not authenticated
+    if (!userId) {
+      return redirectToSignIn({ returnBackUrl: url.href })
+    }
+
+    return NextResponse.next()
   }
 
-  if (host !== baseHost && reqPath.startsWith("/group")) {
+  // 2. Handle custom domain routing (only in production)
+  if (
+    isProduction &&
+    host !== process.env.NEXT_PUBLIC_BASE_HOST &&
+    url.pathname.startsWith("/group")
+  ) {
     try {
-      const response = await fetch(
-        `${origin}/api/domain?host=${encodeURIComponent(host)}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        },
+      const domainResponse = await fetch(
+        `${url.origin}/api/domain?host=${encodeURIComponent(host)}`,
+        { headers: { "Content-Type": "application/json" } },
       )
 
-      if (!response.ok) {
-        return NextResponse.next()
-      }
-
-      const data = await response.json()
-
-      if (data?.status === 200 && data?.domain) {
-        return NextResponse.rewrite(new URL(reqPath, `https://${data.domain}`))
+      if (domainResponse.ok) {
+        const data = await domainResponse.json()
+        if (data?.status === 200 && data?.domain) {
+          return NextResponse.rewrite(
+            new URL(url.pathname, `https://${data.domain}`),
+          )
+        }
       }
     } catch (error) {
-      console.error("Middleware Fetch Error:", error)
-      return NextResponse.next()
+      console.error("Domain routing error:", error)
+      // Fall through to default behavior
     }
   }
 
+  // 3. Public routes
   return NextResponse.next()
 })
 
