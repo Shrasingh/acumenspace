@@ -8,7 +8,7 @@ export const syncSession = async () => {
   if (!userId) return null
 
   let user = await client.user.findUnique({
-    where: { clerkId: userId }
+    where: { clerkId: userId },
   })
 
   if (!user) {
@@ -21,7 +21,7 @@ export const syncSession = async () => {
         firstname: clerkUser.firstName ?? "",
         lastname: clerkUser.lastName ?? "",
         image: clerkUser.imageUrl,
-      }
+      },
     })
   }
 

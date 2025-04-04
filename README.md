@@ -1,10 +1,12 @@
 # AcumenSpace – SaaS LMS (Learning Management System)
 
 ## 🚀 Overview
+
 AcumenSpace is SaaS platform designed to transform knowledge into thriving businesses. It empowers creators to launch and monetize their own online courses and communities, featuring custom domains, affiliate programs, and multi-vendor functionality, making it a complete Learning Management System (LMS) solution.
 AcumenSpace is a scalable, user-friendly SaaS platform that empowers creators to launch and monetize their own online courses and communities. It includes support for custom domains, affiliate programs, and multi-vendor functionality, making it a complete Learning Management System (LMS) solution.
 
 ## 🏗️ Tech Stack
+
 - **Frontend:** Next.js 15
 - **Backend:** Supabase
 - **Authentication:** Clerk
@@ -13,12 +15,14 @@ AcumenSpace is a scalable, user-friendly SaaS platform that empowers creators to
 - **Payments & Subscriptions:** Stripe
 
 ## 🎯 Key Achievements
-- **Boosted user retention  through a smoother and more intuitive onboarding experience.
+
+- \*\*Boosted user retention through a smoother and more intuitive onboarding experience.
 - **Eliminated video hosting costs ($0)** by optimizing storage and delivery, saving thousands while maintaining high performance.
 - **Enhanced engagement** with real-time chat, an event calendar, and a Notion-style editor, making learning and content creation seamless.
 - **Developed an advanced analytics dashboard** to track revenue, user growth, and key metrics while ensuring 99.9% uptime.
 
 ## ✨ Features
+
 - 🎥 **Create and host course modules with $0 video hosting**
 - 📃 **Custom about pages for groups**
 - ✍️ **Node-based text editor like Notion**
@@ -28,7 +32,7 @@ AcumenSpace is a scalable, user-friendly SaaS platform that empowers creators to
 - 📅 **Calendar and events for groups**
 - 💬 **Real-time chat for groups (if time allows)**
 - - 💰 **Custom single-line Stripe component with animations**
-- 🏝️ **New pricing model:** 1 group for **$9/m** 
+- 🏝️ **New pricing model:** 1 group for **$9/m**
 - 🎁 **Free and paid groups**
 - 🏆 **Custom onboarding to increase conversions**
 - 🧑‍💼 **Multi-vendor support**
@@ -44,6 +48,7 @@ AcumenSpace is a scalable, user-friendly SaaS platform that empowers creators to
 - 🟣 **And much more...**
 
 ## 🔧 Installation
+
 To run AcumenSpace locally, follow these steps:
 
 ```bash
@@ -66,11 +71,9 @@ npm run dev
 ```
 
 ## 🏗️ Usage
+
 - **Sign Up/Login:** Users can register using Clerk authentication.
 - **Create a Group:** Set up a community with a custom domain.
 - **Upload Courses:** Use Uploadcare for seamless media storage.
 - **Monetization:** Use Stripe to manage subscriptions and payments.
 - **Engagement:** Leverage real-time chat, events, and posts.
-
-
-

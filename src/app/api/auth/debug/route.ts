@@ -7,8 +7,9 @@ export async function GET() {
   return NextResponse.json({
     clerkUser: user,
     env: {
-      NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
+      NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:
+        process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
       CLERK_SECRET_KEY: process.env.CLERK_SECRET_KEY ? "set" : "not set",
-    }
+    },
   })
 }
