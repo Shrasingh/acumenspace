@@ -12,7 +12,7 @@ const CompleteSigIn = async () => {
   console.log("authenticated", authenticated)
 
   // if user doesn't exist, redirect tem to sign-up page
-  if (authenticated.status === 404) {
+  if (authenticated.status !== 200 && authenticated.status !== 207) {
     const complete = await onSignUpUser({
       firstname: user.firstName as string, // type assertion
       lastname: user.lastName as string, // type assertion
