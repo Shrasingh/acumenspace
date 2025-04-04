@@ -43,24 +43,38 @@ export const onSignUpUser = async (data: {
   clerkId: string
 }) => {
   try {
+    // Check if user already exists
+    const existingUser = await client.user.findUnique({
+      where: { clerkId: data.clerkId },
+    })
+
+    if (existingUser) {
+      return {
+        status: 200,
+        message: "User already exists",
+        id: existingUser.id,
+      }
+    }
+
     const createdUser = await client.user.create({
       data: {
         ...data,
       },
     })
-
-    if (createdUser) {
-      return {
-        status: 200,
-        message: "User successfully created",
-        id: createdUser.id,
-      }
-    }
-
+    console.log("created user", createdUser)
     return {
-      status: 400,
-      message: "User could not be created! Try again",
+      status: 200,
+      message: "User successfully created",
+      id: createdUser.id,
     }
+
+    // if (createdUser) {
+    //   return {
+    //     status: 200,
+    //     message: "User successfully created",
+    //     id: createdUser.id,
+    //   }
+    // }
   } catch (error) {
     return {
       status: 400,

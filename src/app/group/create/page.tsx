@@ -13,14 +13,14 @@ interface GroupCreatePageProps {
 }
 
 const GroupCreatePage = async ({ searchParams }: GroupCreatePageProps) => {
+  const clerkUser = await currentUser()
+  if (!clerkUser) redirect("/sign-in")
+
   // First try to get authenticated user from your system
   let user = await onAuthenticatedUser()
 
   // If not found, try to get from Clerk and sign up
   if (!user?.id) {
-    const clerkUser = await currentUser()
-    if (!clerkUser) redirect("/sign-in")
-
     const signUpResult = await onSignUpUser({
       firstname: clerkUser.firstName ?? "",
       lastname: clerkUser.lastName ?? "",
@@ -28,13 +28,12 @@ const GroupCreatePage = async ({ searchParams }: GroupCreatePageProps) => {
       clerkId: clerkUser.id,
     })
 
-    if (signUpResult.status === 200) {
-      redirect(
-        `/group/create${searchParams.affiliate ? `?affiliate=${searchParams.affiliate}` : ""}`,
-      )
-    } else {
-      redirect("/sign-in")
+    if (signUpResult.status !== 200) {
+      console.error("Signup failed:", signUpResult)
+      redirect("/sign-in?error=signup_failed")
     }
+
+    user = await onAuthenticatedUser()
   }
 
   // Get affiliate info if affiliate param exists
@@ -70,7 +69,7 @@ const GroupCreatePage = async ({ searchParams }: GroupCreatePageProps) => {
         )}
       </div>
       <CreateGroup
-        userId={user.id}
+        userId={user.id ?? ""}
         affiliate={affiliate.status === 200}
         stripeId={affiliate.user?.Group?.User.stripeId || ""}
       />
